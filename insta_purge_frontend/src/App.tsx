@@ -6,9 +6,11 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
+import { Signin } from "./pages/signin/Signin";
+import { Dashboard } from "./pages/dashboard/dashboard";
 
 export class App extends Component {
-  isUserAuthenticated: any = true;
+  isUserAuthenticated: any = false;
 
   render() {
     return (
@@ -28,8 +30,12 @@ export class App extends Component {
               }}
             />
 
-            <Route path="/login"> in login {/* <About /> */}</Route>
-            <Route path="/dashboard"> in dashboard {/* <Users /> */}</Route>
+            <Route path="/login">
+              <Signin />
+            </Route>
+            <Route path="/dashboard">
+              <Dashboard />
+            </Route>
             <Route path="/register">{/* <Home /> */}</Route>
           </Switch>
         </div>
