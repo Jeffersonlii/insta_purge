@@ -6,6 +6,9 @@ import TextField from "@material-ui/core/TextField";
 import Drawer from "@material-ui/core/Drawer";
 import { Drawer_control, Formik_control } from "./Signin.models";
 import ChevronRightIcon from "@material-ui/icons/ChevronRightSharp";
+import axios, { AxiosResponse } from "axios";
+import { validate_user, create_user } from "../../api.models";
+import { useHistory } from "react-router-dom";
 
 function RegisterForm(prop: { drawer_control: Drawer_control }) {
   return (
@@ -34,10 +37,16 @@ function RegisterForm(prop: { drawer_control: Drawer_control }) {
         return errors;
       }}
       onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
+        axios
+          .post(create_user, { email: values.email, password: values.password })
+          .then((res) => {
+            console.log(res);
+            setSubmitting(false);
+          })
+          .catch((e) => {
+            console.log(e);
+            setSubmitting(false);
+          });
       }}
     >
       {(formik_control: Formik_control) => (
@@ -114,24 +123,36 @@ function RegisterForm(prop: { drawer_control: Drawer_control }) {
 }
 
 function LoginForm(prop: { drawer_control: Drawer_control }) {
+  const [authenticated, setAuthenticated] = useState(false);
+  const history = useHistory();
+
   return (
     <Formik
       initialValues={{ email: "", password: "" }}
-      validate={(values) => {
+      validate={async (values) => {
         console.log(values);
         const errors = { password: "" };
-        // !TODO check if combo is right
-        if (true) {
-          errors["password"] = "Incorrect Credentials";
-        }
+
+        await axios
+          .post(validate_user, {
+            email: values.email,
+            password: values.password,
+          })
+          .then((res: AxiosResponse<{ Authenticated: boolean }>) => {
+            if (!res.data.Authenticated) {
+              errors["password"] = "Incorrect Credentials";
+            } else {
+              setAuthenticated(true);
+            }
+          })
+          .catch((e) => {});
+
         return errors.password === "" ? {} : errors;
       }}
       onSubmit={(values, { setSubmitting }) => {
-        console.log("asdfsd");
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
+        if (authenticated) {
+          history.push("/dashboard");
+        }
       }}
       validateOnChange={false}
       validateOnBlur={false}
@@ -224,28 +245,28 @@ export class Signin extends Component {
   render() {
     return (
       <div className="host">
-        <div className="title-block">
-          <div style={{ flexGrow: 999 }} />
-          <div className="title">Insta Purge</div>
-          <div className="desc"> An Instagram Follow Manager </div>
-          <div style={{ flexGrow: 999 }} />
-          <div className="credit">
-            Made with{" "}
-            <span role="img" aria-label="taco">
-              🌮
-            </span>{" "}
-            by{" "}
-            <a
-              href="https://jeffersonli.dev/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Jefferson Li
-            </a>
+        <div className="row">
+          <div className="title-block">
+            <div className="title">Insta Purge</div>
+            <div className="desc"> An Instagram Follow Manager </div>
+          </div>
+          <div className="form-block">
+            <LoginDrawer />
           </div>
         </div>
-        <div style={{ flexGrow: 1 }}>
-          <LoginDrawer />
+        <div className="credit">
+          Made with{" "}
+          <span role="img" aria-label="taco">
+            🌮
+          </span>{" "}
+          by{" "}
+          <a
+            href="https://jeffersonli.dev/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Jefferson Li
+          </a>
         </div>
       </div>
     );

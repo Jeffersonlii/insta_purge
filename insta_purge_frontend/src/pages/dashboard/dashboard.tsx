@@ -3,6 +3,6 @@ import "./dashboard.scss";
 
 export class Dashboard extends Component {
   render() {
-    return <div>asdfasdf</div>;
+    return <div>Logged in !! </div>;
   }
 }
