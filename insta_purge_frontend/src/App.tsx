@@ -12,10 +12,16 @@ import { Dashboard } from "./pages/dashboard/dashboard";
 export class App extends Component {
   isUserAuthenticated: any = false;
 
+  componentDidMount() {
+    //look in cache if user auth
+  }
+
+  componentWillUnmount() {}
+
   render() {
     return (
       <Router>
-        <div>
+        <div className="masterWrapper">
           <Switch>
             <Route
               exact

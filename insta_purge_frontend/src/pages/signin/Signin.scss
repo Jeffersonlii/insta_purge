@@ -1,0 +1,92 @@
+.host {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  background-image: url("../../assets/imgs/insta_Gradient.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+.title-block {
+  flex-grow: 4;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  color: white;
+  .title {
+    font-size: 6rem;
+  }
+  .desc {
+    font-size: 1rem;
+  }
+  .credit {
+    margin: 1rem;
+  }
+  a {
+    text-decoration: none;
+    background: white;
+    padding: 4px;
+    &:hover {
+      background: black;
+      color: white;
+    }
+  }
+}
+
+.login-block {
+  flex-grow: 1;
+  margin: 2rem;
+  background: white;
+  padding: 2rem;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+  height: calc(100% - 8rem);
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  .flex-align {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .register-block {
+    width: 35rem;
+    margin: 2rem;
+    .back-button {
+      position: absolute;
+      top: 35px;
+      height: 64px;
+    }
+  }
+  .title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  .fields {
+    margin-bottom: 1rem;
+  }
+  .button-row {
+    display: flex;
+    flex-direction: row;
+    & button {
+      flex-grow: 1;
+    }
+  }
+}
+@media only screen and (max-width: 1000px) {
+  .host {
+    flex-direction: column;
+  }
+  .form .register-block {
+    width: calc(100vw - 4rem);
+  }
+}
