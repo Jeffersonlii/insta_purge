@@ -1,14 +1,14 @@
-@import url("https://fonts.googleapis.com/css2?family=Lemonada&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
 .host {
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  background-image: url("../../assets/imgs/insta_Gradient.jpg");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
+  // background-image: url("../../assets/imgs/insta_Gradient.jpg");
+  // background-repeat: no-repeat;
+  // background-attachment: fixed;
+  // background-size: cover;
 }
 .row {
   display: flex;
@@ -23,8 +23,8 @@
   color: white;
   .title {
     font-size: 6rem;
-    font-family: "Lemonada", cursive;
-    margin-bottom: -2rem;
+    font-family: "Ubuntu", sans-serif;
+    margin-bottom: 0.5rem;
   }
   .desc {
     font-size: 1rem;
@@ -103,5 +103,68 @@ a {
   }
   .form-block .form .register-block {
     width: calc(100vw - 4rem);
+  }
+}
+
+.host {
+  background: linear-gradient(
+    44deg,
+    #ba00ff,
+    #ff0000,
+    #ff7300,
+    #ffd800,
+    #ff00d4,
+    #ac008f
+  );
+  background-size: 1200% 1200%;
+
+  -webkit-animation: AnimationName 29s ease infinite;
+  -moz-animation: AnimationName 29s ease infinite;
+  -o-animation: AnimationName 29s ease infinite;
+  animation: AnimationName 29s ease infinite;
+}
+
+@-webkit-keyframes AnimationName {
+  0% {
+    background-position: 99% 0%;
+  }
+  50% {
+    background-position: 2% 100%;
+  }
+  100% {
+    background-position: 99% 0%;
+  }
+}
+@-moz-keyframes AnimationName {
+  0% {
+    background-position: 99% 0%;
+  }
+  50% {
+    background-position: 2% 100%;
+  }
+  100% {
+    background-position: 99% 0%;
+  }
+}
+@-o-keyframes AnimationName {
+  0% {
+    background-position: 99% 0%;
+  }
+  50% {
+    background-position: 2% 100%;
+  }
+  100% {
+    background-position: 99% 0%;
+  }
+}
+@keyframes AnimationName {
+  0% {
+    background-position: 99% 0%;
+  }
+  50% {
+    background-position: 2% 100%;
+  }
+  100% {
+    background-position: 99% 0%;
   }
 }

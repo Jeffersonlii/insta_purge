@@ -247,7 +247,7 @@ export class Signin extends Component {
       <div className="host">
         <div className="row">
           <div className="title-block">
-            <div className="title">InstaMate</div>
+            <div className="title">Intsy</div>
             <div className="desc"> An Instagram Automation Manager </div>
           </div>
           <div className="form-block">
