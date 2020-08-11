@@ -1,0 +1,69 @@
+.drawer {
+  display: flex;
+  height: 100%;
+  background-color: #485461;
+  background-image: linear-gradient(315deg, #485461 0%, #28313b 74%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  flex-direction: column;
+  & * {
+    color: white;
+  }
+  .dashboard_select {
+    .dashboard_block {
+      transition: 0.3s;
+      height: 3rem;
+      margin: 2rem;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      cursor: pointer;
+      padding-left: 8px;
+      margin: 2rem;
+      border-radius: 4px;
+      //   background-color: #48dbfb;
+      //   background-image: linear-gradient(315deg, #48dbfb 0%, #d3d3d3 74%);
+      border: 1px solid transparent;
+      &:hover {
+        border: 1px solid teal;
+        background-color: rgba(1, 1, 1, 0.1);
+      }
+    }
+  }
+  .account-header {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 18rem;
+    height: 6rem;
+  }
+  .accounts {
+    width: 100%;
+    .account_block {
+      height: 4rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      cursor: pointer;
+      transition: 0.3s;
+      background-color: rgba(1, 1, 1, 0.1);
+      &:hover {
+        background-color: rgba(1, 1, 1, 0.01);
+      }
+    }
+  }
+
+  .MuiAccordion-root {
+    background: transparent;
+  }
+  .MuiAccordionDetails-root {
+    padding: 0px;
+  }
+  //   .MuiCollapse-wrapperInner {
+  //     background-color: rgba(1, 1, 1, 0.1);
+  //   }
+}

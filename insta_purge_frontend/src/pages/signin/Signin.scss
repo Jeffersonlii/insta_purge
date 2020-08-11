@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Lemonada&display=swap");
 .host {
   height: 100%;
   display: flex;
@@ -22,6 +23,8 @@
   color: white;
   .title {
     font-size: 6rem;
+    font-family: "Lemonada", cursive;
+    margin-bottom: -2rem;
   }
   .desc {
     font-size: 1rem;
