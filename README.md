@@ -1,3 +1,3 @@
 # insta_purge
 react web app for Instagram management based on schedualing and automation 
-![image](https://user-images.githubusercontent.com/32963293/90210264-7cc30580-ddbb-11ea-9e98-4cc6dd135a6b.png)
+![image](https://user-images.githubusercontent.com/32963293/90210529-2efacd00-ddbc-11ea-99e7-13a19ed61b5b.png)
