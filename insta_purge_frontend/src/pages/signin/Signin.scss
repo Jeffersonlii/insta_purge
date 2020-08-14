@@ -17,7 +17,7 @@
   height: calc(100vh - 4rem);
 }
 .title-block {
-  width: 66%;
+  width: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -48,8 +48,8 @@ a {
   }
 }
 .form-block {
-  width: calc(34%);
-
+  width: 25%;
+  min-width: 27rem;
   .login-block {
     flex-grow: 1;
     margin: 2rem;
