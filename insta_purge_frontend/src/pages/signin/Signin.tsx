@@ -9,6 +9,10 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRightSharp";
 import axios, { AxiosResponse } from "axios";
 import { validate_user, create_user } from "../../api.models";
 import { useHistory } from "react-router-dom";
+import { Divider } from "@material-ui/core";
+import { tryLoggedIn } from "./store/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { defaultState } from "../../store/reducers";
 
 function RegisterForm(prop: { drawer_control: Drawer_control }) {
   return (
@@ -122,8 +126,10 @@ function RegisterForm(prop: { drawer_control: Drawer_control }) {
   );
 }
 
-function LoginForm(prop: { drawer_control: Drawer_control }) {
+function LoginForm(props: { drawer_control: Drawer_control } | any) {
+  console.log(props);
   const [authenticated, setAuthenticated] = useState(false);
+
   const history = useHistory();
 
   return (
@@ -146,6 +152,10 @@ function LoginForm(prop: { drawer_control: Drawer_control }) {
             }
           })
           .catch((e) => {});
+        alert({
+          email: values.email,
+          password: values.password,
+        });
 
         return errors.password === "" ? {} : errors;
       }}
@@ -196,7 +206,7 @@ function LoginForm(prop: { drawer_control: Drawer_control }) {
             <Button
               variant="outlined"
               onClick={() => {
-                prop.drawer_control.open();
+                props.drawer_control.open();
               }}
             >
               Register
@@ -232,15 +242,30 @@ function LoginDrawer() {
         </div>
       </Drawer>
       <main className="login-block">
-        <LoginForm
-          drawer_control={{ open: handleDrawerOpen, close: handleDrawerClose }}
-        />
+        <div className="subblocks">
+          <LoginForm
+            drawer_control={{
+              open: handleDrawerOpen,
+              close: handleDrawerClose,
+            }}
+          />
+        </div>
+
+        <Divider />
+        <div className="desc-paragraph subblocks">
+          <div>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad magni
+            quaerat deleniti assumenda. Nesciunt, maiores quas numquam tenetur
+            illo porro, accusantium quam doloribus eius unde cupiditate
+            consectetur, quibusdam placeat distinctio.
+          </div>
+        </div>
       </main>
     </div>
   );
 }
 
-export class Signin extends Component {
+export default class Signin extends Component {
   onSubmit() {}
   render() {
     return (
@@ -258,7 +283,7 @@ export class Signin extends Component {
           Made with{" "}
           <span role="img" aria-label="taco">
             🌮
-          </span>{" "}
+          </span>
           by{" "}
           <a
             href="https://jeffersonli.dev/"

@@ -7,6 +7,8 @@ import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import PersonIcon from "@material-ui/icons/Person";
+import AddIcon from "@material-ui/icons/Add";
+
 function AccountBlock(props: { account_name: string }) {
   return <div className="account_block">{props.account_name}</div>;
 }
@@ -33,7 +35,9 @@ function AccountAccordion() {
             {["jeff", "jeff2", "temp"].map((account_name) => (
               <AccountBlock account_name={account_name} />
             ))}
-            <AccountBlock account_name="ADD ACCOUNT" />
+            <div className="account_block">
+              <AddIcon />
+            </div>
           </div>
         </AccordionDetails>
       </Accordion>

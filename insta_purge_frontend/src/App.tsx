@@ -6,7 +6,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import { Signin } from "./pages/signin/Signin";
+import Signin from "./pages/signin/Signin";
 import { Dashboard } from "./pages/dashboard/dashboard";
 
 export class App extends Component {
@@ -35,7 +35,6 @@ export class App extends Component {
                 );
               }}
             />
-
             <Route path="/login">
               <Signin />
             </Route>

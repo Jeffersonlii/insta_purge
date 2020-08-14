@@ -1,14 +1,15 @@
-@import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap");
 .host {
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  // background-image: url("../../assets/imgs/insta_Gradient.jpg");
-  // background-repeat: no-repeat;
-  // background-attachment: fixed;
-  // background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-image: url("../../assets/imgs/instamountain.jpg");
+  //background-image: url("../../assets/imgs/insta_Gradient.jpg");
 }
 .row {
   display: flex;
@@ -16,15 +17,16 @@
   height: calc(100vh - 4rem);
 }
 .title-block {
-  flex-grow: 4;
+  width: 66%;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  color: white;
+  color: black;
   .title {
     font-size: 6rem;
-    font-family: "Ubuntu", sans-serif;
+    font-family: "Montserrat", sans-serif;
     margin-bottom: 0.5rem;
+    font-weight: 100;
   }
   .desc {
     font-size: 1rem;
@@ -33,6 +35,7 @@
 .credit {
   margin: 1rem;
   color: white;
+  font-size: 1.1rem;
 }
 a {
   text-decoration: none;
@@ -45,17 +48,31 @@ a {
   }
 }
 .form-block {
-  flex-grow: 1;
+  width: calc(34%);
+
   .login-block {
     flex-grow: 1;
     margin: 2rem;
-    background: white;
     padding: 2rem;
+    background-color: rgba(255, 255, 255, 0.1);
     box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
       0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
       0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
       0 100px 80px rgba(0, 0, 0, 0.12);
     height: calc(100% - 8rem);
+    display: flex;
+    flex-direction: column;
+    .subblocks {
+      height: 50%;
+    }
+    .desc-paragraph {
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      div {
+      }
+    }
   }
   .form {
     display: flex;
@@ -90,81 +107,34 @@ a {
       flex-direction: row;
       & button {
         flex-grow: 1;
+        background: black;
+        color: white;
+        transition: 0.3s;
+        opacity: 1;
+
+        &.MuiButton-outlined.Mui-disabled {
+          opacity: 0.4;
+        }
       }
     }
   }
 }
 @media only screen and (max-width: 1000px) {
+  .title-block {
+    flex-grow: 1;
+    width: 100%;
+  }
   .row {
     flex-direction: column;
   }
   .form-block {
     flex-grow: 6;
+    width: 100%;
   }
   .form-block .form .register-block {
     width: calc(100vw - 4rem);
   }
-}
-
-.host {
-  background: linear-gradient(
-    44deg,
-    #ba00ff,
-    #ff0000,
-    #ff7300,
-    #ffd800,
-    #ff00d4,
-    #ac008f
-  );
-  background-size: 1200% 1200%;
-
-  -webkit-animation: AnimationName 29s ease infinite;
-  -moz-animation: AnimationName 29s ease infinite;
-  -o-animation: AnimationName 29s ease infinite;
-  animation: AnimationName 29s ease infinite;
-}
-
-@-webkit-keyframes AnimationName {
-  0% {
-    background-position: 99% 0%;
-  }
-  50% {
-    background-position: 2% 100%;
-  }
-  100% {
-    background-position: 99% 0%;
-  }
-}
-@-moz-keyframes AnimationName {
-  0% {
-    background-position: 99% 0%;
-  }
-  50% {
-    background-position: 2% 100%;
-  }
-  100% {
-    background-position: 99% 0%;
-  }
-}
-@-o-keyframes AnimationName {
-  0% {
-    background-position: 99% 0%;
-  }
-  50% {
-    background-position: 2% 100%;
-  }
-  100% {
-    background-position: 99% 0%;
-  }
-}
-@keyframes AnimationName {
-  0% {
-    background-position: 99% 0%;
-  }
-  50% {
-    background-position: 2% 100%;
-  }
-  100% {
-    background-position: 99% 0%;
+  .form-block .login-block {
+    mix-blend-mode: unset;
   }
 }

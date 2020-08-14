@@ -12,3 +12,8 @@ export interface Drawer_control {
   open: Function;
   close: Function;
 }
+
+export interface logginInfo {
+  email: string;
+  password: string;
+}
