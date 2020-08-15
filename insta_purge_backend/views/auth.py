@@ -1,16 +1,24 @@
 from __main__ import app
+from models import db, models
 
-@app.route('/validate', methods=['POST', 'GET'])
-def validate():
-    try:
-        email = request.json['email']
-        password = request.json['password']
-    except: 
+from flask import Flask, jsonify, request, make_response
+import jwt
+import datetime
+
+@app.route('/signin', methods=['POST'])
+def signin():
+    auth = request.authorization
+    if not (auth and auth.password and auth.username):
         return 'bad inputs', 400
+    email = auth.username
+    password = auth.password
+    print([email,password])
     if email and password:
         user = models.Users.query.filter_by(email=email).first()
-        if user:
-            return (jsonify({'Authenticated': True}), 200) if user.verify_password(password) else (jsonify({'Authenticated': False}), 200)
-        return 'user creation succeeded', 200
+        if user and user.verify_password(password):
+            token = jwt.encode({'user': email, 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=60)}, app.config['SECRET_KEY'])
+            return (jsonify({'Authenticated': True, 'token': token.decode('UTF-8')}), 200)
+        else:
+            return jsonify({'Authenticated': False}), 200
     else:
-        return 'user validation failed', 400
+        return 'bad inputs', 400

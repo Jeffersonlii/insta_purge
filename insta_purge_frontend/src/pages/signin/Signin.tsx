@@ -10,7 +10,7 @@ import axios, { AxiosResponse } from "axios";
 import { validate_user, create_user } from "../../api.models";
 import { useHistory } from "react-router-dom";
 import { Divider } from "@material-ui/core";
-import { tryLoggedIn } from "./store/actions";
+import { setAuthToken } from "./store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { defaultState } from "../../store/reducers";
 
@@ -129,7 +129,7 @@ function RegisterForm(prop: { drawer_control: Drawer_control }) {
 function LoginForm(props: { drawer_control: Drawer_control } | any) {
   console.log(props);
   const [authenticated, setAuthenticated] = useState(false);
-
+  const dispatch = useDispatch();
   const history = useHistory();
 
   return (
@@ -140,23 +140,27 @@ function LoginForm(props: { drawer_control: Drawer_control } | any) {
         const errors = { password: "" };
 
         await axios
-          .post(validate_user, {
-            email: values.email,
-            password: values.password,
-          })
-          .then((res: AxiosResponse<{ Authenticated: boolean }>) => {
-            if (!res.data.Authenticated) {
-              errors["password"] = "Incorrect Credentials";
-            } else {
-              setAuthenticated(true);
+          .post(
+            validate_user,
+            {},
+            {
+              auth: {
+                username: values.email,
+                password: values.password,
+              },
             }
-          })
+          )
+          .then(
+            (res: AxiosResponse<{ Authenticated: boolean; token: string }>) => {
+              if (!res.data.Authenticated) {
+                errors["password"] = "Incorrect Credentials";
+              } else {
+                dispatch(setAuthToken(res.data.token));
+                setAuthenticated(true);
+              }
+            }
+          )
           .catch((e) => {});
-        alert({
-          email: values.email,
-          password: values.password,
-        });
-
         return errors.password === "" ? {} : errors;
       }}
       onSubmit={(values, { setSubmitting }) => {

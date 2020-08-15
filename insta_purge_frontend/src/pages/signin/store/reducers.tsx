@@ -1,11 +1,13 @@
 export interface defaultState {
   isLoggedIn: boolean;
   userEmail: string | undefined;
+  authToken: string | undefined;
 }
 
 const defaultState: defaultState = {
   isLoggedIn: false,
   userEmail: undefined,
+  authToken: undefined,
 };
 export const reducer = (
   state = defaultState,
@@ -16,6 +18,8 @@ export const reducer = (
       return { ...state, isLoggedIn: action.payload };
     case "setUserEmail":
       return { ...state, userEmail: action.payload };
+    case "setAuthToken":
+      return { ...state, authToken: action.payload };
     default:
       return state;
   }

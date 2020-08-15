@@ -1,2 +1,3 @@
 insta_purge_backend/env/*
 insta_purge_backend/__pycache__/*
+insta_purge_backend/secrets.py
