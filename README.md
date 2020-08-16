@@ -31,7 +31,7 @@ This react app automates common instagram management tasks
  - [ ] set up dashboard views
  - [ ] deploy to heroku
 
-## TODO - Flask backend
+## TODO - React backend
  - [x] set up base models and serializers
     - [x] auth apis
       - [x] login
