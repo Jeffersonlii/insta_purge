@@ -4,6 +4,8 @@ This react app automates common instagram management tasks
  - REST apis written in Flask backend
  - token based authentication 
  - instagram control done using [instaPy](https://github.com/timgrossmann/InstaPy)
+![image](https://user-images.githubusercontent.com/32963293/90210529-2efacd00-ddbc-11ea-99e7-13a19ed61b5b.png)
+
 ## GET STARTED
  - frontend
    1. `npm i`
@@ -48,4 +50,3 @@ This react app automates common instagram management tasks
 | Programmer    | [Jefferson Li](https://www.linkedin.com/in/jeffersonlii/)|
 | UI UX Designer| [Jefferson Li](https://www.linkedin.com/in/jeffersonlii/)|
 
-![image](https://user-images.githubusercontent.com/32963293/90210529-2efacd00-ddbc-11ea-99e7-13a19ed61b5b.png)
