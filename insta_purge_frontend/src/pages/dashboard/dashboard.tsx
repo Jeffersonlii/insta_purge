@@ -25,7 +25,7 @@ function AccountBlock(props: { account: instaAccount; onDel: Function }) {
       <div style={{ flexGrow: 14 }} />
       <div className="acc-text"> @{props.account.userName}</div>
       <div style={{ flexGrow: 9 }} />
-      <div onClick={() => props.onDel(props.account)} className="delete-icon">
+      <div onClick={() => props.onDel(props.account)}>
         <DeleteForeverIcon />
       </div>
     </div>
