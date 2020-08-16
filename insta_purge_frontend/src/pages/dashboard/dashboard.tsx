@@ -42,8 +42,32 @@ function AccountAccordion(props: {
   const [expanded, setExpanded] = React.useState<boolean>(false);
   const [openAdditionDialog, setOpenAdditionDialog] = React.useState(false);
 
+  let placeholderAccount = {
+    id: -1,
+    userName: "No Accounts in Database",
+    password: "",
+  };
+  const [currentAccount, setCurrentAccount] = React.useState(
+    placeholderAccount
+  );
+  React.useEffect(() => {
+    console.log(props.accounts);
+    if (!props.accounts.find((acc) => acc.id === currentAccount.id)) {
+      if (props.accounts.length > 0) {
+        setCurrentAccount(props.accounts[0]);
+      } else {
+        setCurrentAccount(placeholderAccount);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.accounts]);
+
   const toggleAccordion = () => () => {
     setExpanded(!expanded);
+  };
+  const onSelectAccount = (account: instaAccount) => {
+    console.log(account);
+    setCurrentAccount(account);
   };
   const onAddInstaAccount = (value: newInstaAccount) => {
     setOpenAdditionDialog(false);
@@ -57,20 +81,21 @@ function AccountAccordion(props: {
       <Accordion square expanded={expanded} onChange={toggleAccordion()}>
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
           <div className="account-header">
-            <PersonIcon /> : @
-            {props.accounts[0] ? props.accounts[0].userName : ""}
+            <PersonIcon /> : @{currentAccount.userName}
           </div>
         </AccordionSummary>
         <AccordionDetails>
           <div className="accounts">
             {props.accounts.map((account: instaAccount) => (
-              <AccountBlock
-                key={account.id}
-                account={account}
-                onDel={(v: instaAccount) => {
-                  onDelInstaAccount(v);
-                }}
-              />
+              <div onClick={() => onSelectAccount(account)}>
+                <AccountBlock
+                  key={account.id}
+                  account={account}
+                  onDel={(v: instaAccount) => {
+                    onDelInstaAccount(v);
+                  }}
+                />
+              </div>
             ))}
             <div
               className="account_block add"
