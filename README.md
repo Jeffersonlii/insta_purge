@@ -14,7 +14,7 @@ This react app automates common instagram management tasks
    3. run 'set FLASK_APP=app.py' 
    4. `py __init__.py` to run server 
 ## TODO - Flutter Frontend
- - [x] implement user login
+ - [x] implement user login, user registration
    - [x jwt based authentication
  - [ ] implement multiple instagram accounts
    - [ ] add an account
