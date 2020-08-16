@@ -7,14 +7,29 @@ import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import PersonIcon from "@material-ui/icons/Person";
-import AddIcon from "@material-ui/icons/Add";
-import { getInstaAccounts, addInstaAccount } from "./store/actions";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import {
+  getInstaAccounts,
+  addInstaAccount,
+  deleteInstaAccount,
+} from "./store/actions";
 import { connect } from "react-redux";
 import { defaultState } from "../../store/reducers";
 import { instaAccount, newInstaAccount } from "./dashboard.models";
 import AddInstaAccountDialog from "./components/add-insta-account-dialog/add-insta-account-dialog";
-function AccountBlock(props: { account_name: string }) {
-  return <div className="account_block">{props.account_name}</div>;
+
+function AccountBlock(props: { account: instaAccount; onDel: Function }) {
+  return (
+    <div className="account_block">
+      <div style={{ flexGrow: 14 }} />
+      <div className="acc-text"> @{props.account.userName}</div>
+      <div style={{ flexGrow: 9 }} />
+      <div onClick={() => props.onDel(props.account)} className="delete-icon">
+        <DeleteForeverIcon />
+      </div>
+    </div>
+  );
 }
 function DashboardBlock(props: { account_name: string }) {
   return <div className="dashboard_block">{props.account_name}</div>;
@@ -22,6 +37,7 @@ function DashboardBlock(props: { account_name: string }) {
 function AccountAccordion(props: {
   accounts: instaAccount[];
   onAdd: Function;
+  onDel: Function;
 }) {
   const [expanded, setExpanded] = React.useState<boolean>(false);
   const [openAdditionDialog, setOpenAdditionDialog] = React.useState(false);
@@ -33,24 +49,34 @@ function AccountAccordion(props: {
     setOpenAdditionDialog(false);
     props.onAdd(value);
   };
+  const onDelInstaAccount = (value: instaAccount) => {
+    props.onDel(value);
+  };
   return (
     <div>
       <Accordion square expanded={expanded} onChange={toggleAccordion()}>
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
           <div className="account-header">
-            <PersonIcon /> : @ jeff
+            <PersonIcon /> : @
+            {props.accounts[0] ? props.accounts[0].userName : ""}
           </div>
         </AccordionSummary>
         <AccordionDetails>
           <div className="accounts">
             {props.accounts.map((account: instaAccount) => (
-              <AccountBlock key={account.id} account_name={account.userName} />
+              <AccountBlock
+                key={account.id}
+                account={account}
+                onDel={(v: instaAccount) => {
+                  onDelInstaAccount(v);
+                }}
+              />
             ))}
             <div
               className="account_block"
               onClick={() => setOpenAdditionDialog(true)}
             >
-              <AddIcon />
+              <AddCircleIcon />
             </div>
           </div>
         </AccordionDetails>
@@ -64,7 +90,12 @@ function AccountAccordion(props: {
 }
 
 class Dashboard extends Component<
-  { all_insta_accounts: any; getInstaAccounts: any; addInstaAccount: any },
+  {
+    all_insta_accounts: any;
+    getInstaAccounts: any;
+    addInstaAccount: any;
+    deleteInstaAccount: any;
+  },
   { drawerOpen: boolean }
 > {
   constructor(props: any) {
@@ -75,10 +106,14 @@ class Dashboard extends Component<
     props.getInstaAccounts();
   }
   onAdd(account: newInstaAccount) {
+    if (account !== undefined) {
+      this.props.addInstaAccount(account);
+    }
+  }
+  onDel(account: instaAccount) {
     console.log(account);
     if (account !== undefined) {
-      //console.log(this.props);
-      this.props.addInstaAccount(account);
+      this.props.deleteInstaAccount(account);
     }
   }
   render() {
@@ -91,6 +126,9 @@ class Dashboard extends Component<
                 accounts={this.props.all_insta_accounts}
                 onAdd={(v: newInstaAccount) => {
                   this.onAdd(v);
+                }}
+                onDel={(v: instaAccount) => {
+                  this.onDel(v);
                 }}
               />
             </div>
@@ -114,5 +152,6 @@ const mapStateToProps = (state: defaultState) => ({
 const mapDispatchToProps = {
   getInstaAccounts,
   addInstaAccount,
+  deleteInstaAccount,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

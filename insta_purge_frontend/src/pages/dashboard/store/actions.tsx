@@ -11,3 +11,7 @@ export const addInstaAccount = (payload: models.newInstaAccount) => ({
   type: "addInstaAccounts",
   payload: payload,
 });
+export const deleteInstaAccount = (payload: models.instaAccount) => ({
+  type: "deleteInstaAccounts",
+  payload: payload,
+});

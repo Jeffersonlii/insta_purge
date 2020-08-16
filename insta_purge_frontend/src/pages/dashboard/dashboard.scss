@@ -54,6 +54,16 @@
       &:hover {
         background-color: rgba(1, 1, 1, 0.01);
       }
+      .acc-text {
+        word-wrap: break-word;
+        max-width: 15rem;
+      }
+      .delete-icon {
+        margin: 1rem;
+        .MuiSvgIcon-root:hover {
+          fill: red;
+        }
+      }
     }
   }
 

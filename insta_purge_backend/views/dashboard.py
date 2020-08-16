@@ -25,11 +25,6 @@ def add_insta_accounts(caller_email):
         password = request.json['password']
     except: 
         return 'bad inputs', 400
-    try:
-        #TODO make sure this account is valid by using instaPy 
-        pass
-    except: 
-        return 'instagram credentials invalid', 400
 
     if user_name and password:
         newAcc = models.InstagramAccounts(user_name, password, owner_id=user.id)
@@ -38,6 +33,30 @@ def add_insta_accounts(caller_email):
         return 'instagram account addition succeeded', 200
     else:
         return 'instagram account addition failed', 400
+
+@app.route('/DELETE_INSTA_ACCOUNT', methods=['DELETE'])
+@token_required
+def delete_insta_accounts(caller_email):
+    user = models.Users.query.filter_by(email=caller_email).first()
+
+    try:
+        account_id = request.json['account_id']
+        insta_account = models.InstagramAccounts.query.filter_by(id=account_id).first()
+        if insta_account == None:
+            raise 
+    except: 
+        return 'bad inputs', 400
+    if insta_account.owner_id != user.id:
+        return 'user has no permission to perform this action', 400
+
+
+    if insta_account:
+        db.session.delete(insta_account)
+        db.session.commit()
+
+        return 'instagram account deletion succeeded', 200
+    else:
+        return 'instagram account deletion failed', 400
 
 
 

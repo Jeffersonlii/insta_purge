@@ -7,5 +7,6 @@ export default function* rootSaga() {
     singin.tryLogIn(),
     dashboard.getInstaAccounts$(),
     dashboard.addInstaAccounts$(),
+    dashboard.deleteInstaAccounts$(),
   ]);
 }
