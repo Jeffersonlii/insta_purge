@@ -6,6 +6,6 @@ export default function* rootSaga() {
   yield all([
     singin.tryLogIn(),
     dashboard.getInstaAccounts$(),
-    dashboard.addInstaAccounts$,
+    dashboard.addInstaAccounts$(),
   ]);
 }

@@ -75,50 +75,53 @@ a {
       }
     }
   }
-  .form {
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  .flex-align {
+    height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 100%;
-    .flex-align {
-      height: 100%;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+  }
+  .register-block {
+    width: 35rem;
+    margin: 2rem;
+    .back-button {
+      position: absolute;
+      top: 35px;
+      height: 64px;
     }
-    .register-block {
-      width: 35rem;
-      margin: 2rem;
-      .back-button {
-        position: absolute;
-        top: 35px;
-        height: 64px;
-      }
-    }
-    .title {
-      font-size: 2rem;
-      margin-bottom: 2rem;
-    }
-    .fields {
-      margin-bottom: 1rem;
-    }
-    .button-row {
-      display: flex;
-      flex-direction: row;
-      & button {
-        flex-grow: 1;
-        background: black;
-        color: white;
-        transition: 0.3s;
-        opacity: 1;
+  }
+  .title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  .fields {
+    margin-bottom: 1rem;
+  }
+  .button-row {
+    display: flex;
+    flex-direction: row;
+    & button {
+      flex-grow: 1;
+      background: black;
+      color: white;
+      transition: 0.3s;
+      opacity: 1;
 
-        &.MuiButton-outlined.Mui-disabled {
-          opacity: 0.4;
-        }
+      &.MuiButton-outlined.Mui-disabled {
+        opacity: 0.4;
       }
     }
   }
+}
+.standard-margin {
+  margin: 2rem;
 }
 @media only screen and (max-width: 1000px) {
   .title-block {

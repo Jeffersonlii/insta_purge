@@ -9,7 +9,7 @@ def token_required(f):
     def decorated(*args, **kwargs):
         data = {}
         try:
-            data = jwt.decode(request.headers['Authorization'].split()[1].encode('UTF-8'), app.config['SECRET_KEY'])
+            data = jwt.decode(request.headers['Authorization'].encode('UTF-8'), app.config['SECRET_KEY'])
         except :
             return 'Token is missing or invalid', 400
         return f(*args, **kwargs, caller_email = data['user'])

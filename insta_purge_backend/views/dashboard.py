@@ -21,7 +21,7 @@ def add_insta_accounts(caller_email):
     user = models.Users.query.filter_by(email=caller_email).first()
 
     try:
-        user_name = request.json['user_name']
+        user_name = request.json['userName']
         password = request.json['password']
     except: 
         return 'bad inputs', 400

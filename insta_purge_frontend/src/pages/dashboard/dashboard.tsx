@@ -8,43 +8,57 @@ import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import PersonIcon from "@material-ui/icons/Person";
 import AddIcon from "@material-ui/icons/Add";
-import { store } from "../../index";
 import { getInstaAccounts, addInstaAccount } from "./store/actions";
 import { connect } from "react-redux";
 import { defaultState } from "../../store/reducers";
-import { instaAccount } from "./dashboard.models";
+import { instaAccount, newInstaAccount } from "./dashboard.models";
+import AddInstaAccountDialog from "./components/add-insta-account-dialog/add-insta-account-dialog";
 function AccountBlock(props: { account_name: string }) {
   return <div className="account_block">{props.account_name}</div>;
 }
 function DashboardBlock(props: { account_name: string }) {
   return <div className="dashboard_block">{props.account_name}</div>;
 }
-function AccountAccordion(props: { accounts: instaAccount[] }) {
+function AccountAccordion(props: {
+  accounts: instaAccount[];
+  onAdd: Function;
+}) {
   const [expanded, setExpanded] = React.useState<boolean>(false);
+  const [openAdditionDialog, setOpenAdditionDialog] = React.useState(false);
 
   const toggleAccordion = () => () => {
     setExpanded(!expanded);
   };
-
+  const onAddInstaAccount = (value: newInstaAccount) => {
+    setOpenAdditionDialog(false);
+    props.onAdd(value);
+  };
   return (
     <div>
       <Accordion square expanded={expanded} onChange={toggleAccordion()}>
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
           <div className="account-header">
-            <PersonIcon /> : jeff
+            <PersonIcon /> : @ jeff
           </div>
         </AccordionSummary>
         <AccordionDetails>
           <div className="accounts">
             {props.accounts.map((account: instaAccount) => (
-              <AccountBlock account_name={account.userName} />
+              <AccountBlock key={account.id} account_name={account.userName} />
             ))}
-            <div className="account_block">
+            <div
+              className="account_block"
+              onClick={() => setOpenAdditionDialog(true)}
+            >
               <AddIcon />
             </div>
           </div>
         </AccordionDetails>
       </Accordion>
+      <AddInstaAccountDialog
+        open={openAdditionDialog}
+        onClose={onAddInstaAccount}
+      />
     </div>
   );
 }
@@ -60,13 +74,25 @@ class Dashboard extends Component<
     //dispatches
     props.getInstaAccounts();
   }
+  onAdd(account: newInstaAccount) {
+    console.log(account);
+    if (account !== undefined) {
+      //console.log(this.props);
+      this.props.addInstaAccount(account);
+    }
+  }
   render() {
     return (
       <div>
         <Drawer variant="persistent" anchor="left" open={this.state.drawerOpen}>
           <div className="drawer">
             <div className="account_select">
-              <AccountAccordion accounts={this.props.all_insta_accounts} />
+              <AccountAccordion
+                accounts={this.props.all_insta_accounts}
+                onAdd={(v: newInstaAccount) => {
+                  this.onAdd(v);
+                }}
+              />
             </div>
             <Divider />
             <div className="dashboard_select">

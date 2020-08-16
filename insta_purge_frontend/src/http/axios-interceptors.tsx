@@ -18,7 +18,7 @@ export const authenticatedAxios = () => {
     if (!token) {
       token = localStorage["token"];
     }
-    config.headers.Authorization = token ? `Bearer ${token}` : "";
+    config.headers.Authorization = token ? token : "";
     return config;
   });
   return instance;
