@@ -60,6 +60,8 @@
       }
       .delete {
         .MuiSvgIcon-root {
+          cursor: pointer;
+
           padding: 0.3rem;
           margin: 0.7rem;
           transition: 0.3s;
@@ -80,12 +82,23 @@
           transition: 0.3s;
           background-color: transparent;
           border-radius: 30px;
-
-          &:hover {
-            fill: green;
+        }
+        &:hover {
+          .MuiSvgIcon-root {
+            fill: blue;
             background-color: white;
             border-radius: 10px;
           }
+        }
+      }
+      &.selected {
+        background-color: white;
+        cursor: auto;
+        & * {
+          color: black !important;
+        }
+        &:hover {
+          background-color: white;
         }
       }
     }
@@ -97,7 +110,4 @@
   .MuiAccordionDetails-root {
     padding: 0px;
   }
-  //   .MuiCollapse-wrapperInner {
-  //     background-color: rgba(1, 1, 1, 0.1);
-  //   }
 }

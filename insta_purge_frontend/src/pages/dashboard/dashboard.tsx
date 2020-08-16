@@ -19,9 +19,13 @@ import { defaultState } from "../../store/reducers";
 import { instaAccount, newInstaAccount } from "./dashboard.models";
 import AddInstaAccountDialog from "./components/add-insta-account-dialog/add-insta-account-dialog";
 
-function AccountBlock(props: { account: instaAccount; onDel: Function }) {
+function AccountBlock(props: {
+  account: instaAccount;
+  onDel: Function;
+  selected: boolean;
+}) {
   return (
-    <div className="account_block">
+    <div className={"account_block" + (props.selected ? " selected" : "")}>
       <div style={{ flexGrow: 14 }} />
       <div className="acc-text"> @{props.account.userName}</div>
       <div style={{ flexGrow: 9 }} />
@@ -51,7 +55,6 @@ function AccountAccordion(props: {
     placeholderAccount
   );
   React.useEffect(() => {
-    console.log(props.accounts);
     if (!props.accounts.find((acc) => acc.id === currentAccount.id)) {
       if (props.accounts.length > 0) {
         setCurrentAccount(props.accounts[0]);
@@ -90,6 +93,7 @@ function AccountAccordion(props: {
               <div onClick={() => onSelectAccount(account)}>
                 <AccountBlock
                   key={account.id}
+                  selected={account === currentAccount}
                   account={account}
                   onDel={(v: instaAccount) => {
                     onDelInstaAccount(v);
