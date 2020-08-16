@@ -25,7 +25,7 @@ function AccountBlock(props: { account: instaAccount; onDel: Function }) {
       <div style={{ flexGrow: 14 }} />
       <div className="acc-text"> @{props.account.userName}</div>
       <div style={{ flexGrow: 9 }} />
-      <div onClick={() => props.onDel(props.account)}>
+      <div onClick={() => props.onDel(props.account)} className="delete">
         <DeleteForeverIcon />
       </div>
     </div>
@@ -73,7 +73,7 @@ function AccountAccordion(props: {
               />
             ))}
             <div
-              className="account_block"
+              className="account_block add"
               onClick={() => setOpenAdditionDialog(true)}
             >
               <AddCircleIcon />

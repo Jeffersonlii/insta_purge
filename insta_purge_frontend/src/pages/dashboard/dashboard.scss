@@ -58,17 +58,34 @@
         word-wrap: break-word;
         max-width: 15rem;
       }
-      .MuiSvgIcon-root {
-        padding: 0.3rem;
-        margin: 0.7rem;
-        transition: 0.3s;
-        background-color: transparent;
-        border-radius: 30px;
+      .delete {
+        .MuiSvgIcon-root {
+          padding: 0.3rem;
+          margin: 0.7rem;
+          transition: 0.3s;
+          background-color: transparent;
+          border-radius: 30px;
 
-        &:hover {
-          fill: red;
-          background-color: black;
-          border-radius: 10px;
+          &:hover {
+            fill: red;
+            background-color: black;
+            border-radius: 10px;
+          }
+        }
+      }
+      &.add {
+        .MuiSvgIcon-root {
+          padding: 0.3rem;
+          margin: 0.7rem;
+          transition: 0.3s;
+          background-color: transparent;
+          border-radius: 30px;
+
+          &:hover {
+            fill: green;
+            background-color: white;
+            border-radius: 10px;
+          }
         }
       }
     }
