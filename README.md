@@ -15,7 +15,7 @@ This react app automates common instagram management tasks
    2. run 'pip install flask' in created enviroment
    3. run 'set FLASK_APP=app.py' 
    4. `py __init__.py` to run server 
-## TODO - Flutter Frontend
+## TODO - React Frontend
  - [x] implement user login, user registration
    - [x jwt based authentication
  - [ ] implement multiple instagram accounts
@@ -31,7 +31,7 @@ This react app automates common instagram management tasks
  - [ ] set up dashboard views
  - [ ] deploy to heroku
 
-## TODO - React backend
+## TODO - Flask backend
  - [x] set up base models and serializers
     - [x] auth apis
       - [x] login
