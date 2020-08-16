@@ -1,5 +1,5 @@
 from __main__ import app
-from models import db, models
+from models import models
 
 from flask import Flask, jsonify, request, make_response
 import jwt
@@ -12,7 +12,6 @@ def signin():
         return 'bad inputs', 400
     email = auth.username
     password = auth.password
-    print([email,password])
     if email and password:
         user = models.Users.query.filter_by(email=email).first()
         if user and user.verify_password(password):

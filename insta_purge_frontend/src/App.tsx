@@ -7,7 +7,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import Signin from "./pages/signin/Signin";
-import { Dashboard } from "./pages/dashboard/dashboard";
+import Dashboard from "./pages/dashboard/dashboard";
 
 export class App extends Component {
   isUserAuthenticated: any = false;

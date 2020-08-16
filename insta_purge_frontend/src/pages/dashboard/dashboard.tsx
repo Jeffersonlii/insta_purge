@@ -8,14 +8,18 @@ import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import PersonIcon from "@material-ui/icons/Person";
 import AddIcon from "@material-ui/icons/Add";
-
+import { store } from "../../index";
+import { getInstaAccounts, addInstaAccount } from "./store/actions";
+import { connect } from "react-redux";
+import { defaultState } from "../../store/reducers";
+import { instaAccount } from "./dashboard.models";
 function AccountBlock(props: { account_name: string }) {
   return <div className="account_block">{props.account_name}</div>;
 }
 function DashboardBlock(props: { account_name: string }) {
   return <div className="dashboard_block">{props.account_name}</div>;
 }
-function AccountAccordion() {
+function AccountAccordion(props: { accounts: instaAccount[] }) {
   const [expanded, setExpanded] = React.useState<boolean>(false);
 
   const toggleAccordion = () => () => {
@@ -32,8 +36,8 @@ function AccountAccordion() {
         </AccordionSummary>
         <AccordionDetails>
           <div className="accounts">
-            {["jeff", "jeff2", "temp"].map((account_name) => (
-              <AccountBlock account_name={account_name} />
+            {props.accounts.map((account: instaAccount) => (
+              <AccountBlock account_name={account.userName} />
             ))}
             <div className="account_block">
               <AddIcon />
@@ -45,10 +49,16 @@ function AccountAccordion() {
   );
 }
 
-export class Dashboard extends Component<{}, { drawerOpen: boolean }> {
-  constructor(props: { drawerOpen: boolean }) {
+class Dashboard extends Component<
+  { all_insta_accounts: any; getInstaAccounts: any; addInstaAccount: any },
+  { drawerOpen: boolean }
+> {
+  constructor(props: any) {
     super(props);
     this.state = { drawerOpen: true };
+
+    //dispatches
+    props.getInstaAccounts();
   }
   render() {
     return (
@@ -56,15 +66,13 @@ export class Dashboard extends Component<{}, { drawerOpen: boolean }> {
         <Drawer variant="persistent" anchor="left" open={this.state.drawerOpen}>
           <div className="drawer">
             <div className="account_select">
-              <AccountAccordion />
+              <AccountAccordion accounts={this.props.all_insta_accounts} />
             </div>
             <Divider />
             <div className="dashboard_select">
-              {["dashboard 1", "dashboard 2", "dashboard 3"].map(
-                (account_name) => (
-                  <DashboardBlock account_name={account_name} />
-                )
-              )}
+              {["d1", "d2", "d3"].map((db) => (
+                <DashboardBlock account_name={db} />
+              ))}
             </div>
           </div>
         </Drawer>
@@ -73,3 +81,12 @@ export class Dashboard extends Component<{}, { drawerOpen: boolean }> {
     );
   }
 }
+
+const mapStateToProps = (state: defaultState) => ({
+  all_insta_accounts: state.dashboard.instaAccounts,
+});
+const mapDispatchToProps = {
+  getInstaAccounts,
+  addInstaAccount,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

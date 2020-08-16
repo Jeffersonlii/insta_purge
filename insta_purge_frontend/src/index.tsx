@@ -15,7 +15,7 @@ import reducer from "./store/reducers";
 //sagas
 import allSagas from "./store/sagas";
 const sagaMiddleware = createSagaMiddleware();
-const store = createStore(reducer, applyMiddleware(sagaMiddleware));
+export const store = createStore(reducer, applyMiddleware(sagaMiddleware));
 sagaMiddleware.run(allSagas);
 
 ReactDOM.render(

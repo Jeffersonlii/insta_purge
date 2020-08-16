@@ -23,11 +23,12 @@ def create_app():
 
 app = create_app()
 
-#views
-import views.auth
-import views.dashboard
-import views.user
 
 if __name__ == "__main__":
+    #views
+    import views.auth
+    import views.dashboard
+    import views.user
+
     app.run()
 

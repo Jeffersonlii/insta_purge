@@ -19,6 +19,7 @@ export const reducer = (
     case "setUserEmail":
       return { ...state, userEmail: action.payload };
     case "setAuthToken":
+      localStorage["token"] = action.payload;
       return { ...state, authToken: action.payload };
     default:
       return state;

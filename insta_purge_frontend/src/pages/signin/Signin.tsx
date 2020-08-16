@@ -6,14 +6,13 @@ import TextField from "@material-ui/core/TextField";
 import Drawer from "@material-ui/core/Drawer";
 import { Drawer_control, Formik_control } from "./Signin.models";
 import ChevronRightIcon from "@material-ui/icons/ChevronRightSharp";
-import axios, { AxiosResponse } from "axios";
-import { validate_user, create_user } from "../../api.models";
+import { AxiosResponse } from "axios";
+import { validate_user, create_user } from "../../http/api.models";
 import { useHistory } from "react-router-dom";
 import { Divider } from "@material-ui/core";
 import { setAuthToken } from "./store/actions";
-import { useDispatch, useSelector } from "react-redux";
-import { defaultState } from "../../store/reducers";
-
+import { useDispatch } from "react-redux";
+import { unauthenticatedAxios } from "../../http/axios-interceptors";
 function RegisterForm(prop: { drawer_control: Drawer_control }) {
   return (
     <Formik
@@ -37,18 +36,15 @@ function RegisterForm(prop: { drawer_control: Drawer_control }) {
         } else if (values.password !== values.confirm_password) {
           errors["confirm_password"] = "Passwords must match";
         }
-        console.log(errors);
         return errors;
       }}
       onSubmit={(values, { setSubmitting }) => {
-        axios
+        unauthenticatedAxios()
           .post(create_user, { email: values.email, password: values.password })
           .then((res) => {
-            console.log(res);
             setSubmitting(false);
           })
           .catch((e) => {
-            console.log(e);
             setSubmitting(false);
           });
       }}
@@ -127,7 +123,6 @@ function RegisterForm(prop: { drawer_control: Drawer_control }) {
 }
 
 function LoginForm(props: { drawer_control: Drawer_control } | any) {
-  console.log(props);
   const [authenticated, setAuthenticated] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -136,10 +131,9 @@ function LoginForm(props: { drawer_control: Drawer_control } | any) {
     <Formik
       initialValues={{ email: "", password: "" }}
       validate={async (values) => {
-        console.log(values);
         const errors = { password: "" };
 
-        await axios
+        await unauthenticatedAxios()
           .post(
             validate_user,
             {},

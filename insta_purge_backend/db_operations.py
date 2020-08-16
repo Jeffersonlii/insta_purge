@@ -1,10 +1,9 @@
 import sys, os
-from models import models
-from app import db, create_app
-
+from __init__ import create_app
 def create_db():
     app = create_app()
     with app.app_context():
+        from models import models, db
         db.create_all()
 
 

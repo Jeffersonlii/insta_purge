@@ -1,14 +1,15 @@
 from __main__ import app
+from flask import Flask, jsonify, request, make_response
+from models import db, models
 
 #-------------------CRUD API FOR USER MANAGEMENT#-------------------
 @app.route('/GET_USER', methods=['GET'])
 def get_user():
+    #TODO
     return jsonify({'result': bcrypt.hashpw('123', bcrypt.gensalt()), 'length':123 }), 200
-
 
 @app.route('/CREATE_USER', methods=['POST'])
 def create_user():
-    print(request.json)
     try:
         email = request.json['email']
         password = request.json['password']
@@ -24,12 +25,12 @@ def create_user():
 
 @app.route('/MODIFY_USER', methods=['POST'])
 def modify_user():
-
+    #TODO
     return jsonify({'result': bcrypt.hashpw('123', bcrypt.gensalt()), 'length':123 }), 200
 
 @app.route('/DELETE_USER', methods=['POST'])
 def delete_user():
-
+    #TODO
     return jsonify({'result': bcrypt.hashpw('123', bcrypt.gensalt()), 'length':123 }), 200
 
 #-------------------END CRUD API FOR USER MANAGEMENT#-------------------
