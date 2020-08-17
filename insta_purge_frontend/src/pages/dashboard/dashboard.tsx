@@ -49,7 +49,6 @@ function AccountAccordion(props: {
   let placeholderAccount = {
     id: -1,
     userName: "No Accounts in Database",
-    password: "",
   };
   const [currentAccount, setCurrentAccount] = React.useState(
     placeholderAccount

@@ -5,12 +5,13 @@ import json, os, bcrypt
 from flask_cors import CORS
 
 from models import db, models
-from secrets import SECRET_KEY
+from secrets import SECRET_KEY 
 def create_app():
 
     #inits
     app = Flask(__name__)
     app.config['SECRET_KEY'] = SECRET_KEY
+
     CORS(app)
     basedir = os.path.abspath(os.path.dirname(__file__))
     #db

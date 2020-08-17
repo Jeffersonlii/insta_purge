@@ -3,7 +3,8 @@ from flask import Flask, jsonify, request, make_response
 from models import db, models
 import jwt
 from views.helpers import token_required
-
+from instapy import InstaPy
+ 
 @app.route('/GET_INSTA_ACCOUNTS', methods=['GET'])
 @token_required
 def get_insta_accounts(caller_email):
@@ -58,5 +59,14 @@ def delete_insta_accounts(caller_email):
     else:
         return 'instagram account deletion failed', 400
 
+@app.route('/VERIFY_INSTA_ACCOUNT_VALIDITY', methods=['get'])
+def verify_account_validity():
+    insta_name = request.args['userName']
+    insta_pw = request.args['password']
 
-
+    if not (insta_name and insta_pw):
+        return 'bad inputs', 400
+    a = InstaPy(username='DEV___0000', password='Ve28cf9d??', headless_browser=True)
+    # with smart_run(session, threaded=True):
+    #     pass
+    return 'asdf', 200
